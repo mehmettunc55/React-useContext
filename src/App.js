@@ -1,5 +1,6 @@
 import {useState} from 'react'
-import StudentItem from './components/StudentItem'
+import StudentList from './components/StudentList'
+
 
 const data = [
   { id: 1, name: 'Jason Response', email: 'jason@mail.com', age: 23, color: 'lightcyan' },
@@ -10,15 +11,19 @@ const data = [
 
 
 const App = () => {
-  const [student, setStudent] = useState(data)
+  const [students, setStudents] = useState(data)
+
+  const changeColor = (id, color) => {
+    setStudents(students.map((student)=> (student.id === id ? {...student, color:color} : student)))
+  }
 
   return (
     <div className='App'>
     <header>
-      <h1>welcome</h1>
+      <h1 style={{textAlign:'center', color:'red', fontSize:'1,5rem'}}>WELCOME</h1>
       
     </header> 
-    <StudentItem/> 
+    <StudentList students={students} changeColor = {changeColor}/>
     </div>
   )
 }
